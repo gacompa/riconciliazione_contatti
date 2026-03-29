@@ -15,4 +15,9 @@ Come funziona la logica "Selettiva"
 Se il file CSV di Outlook ha le intestazioni diverse (es. in italiano "Indirizzo di posta elettronica"), bisogna cambiare la variabile chiave_duplicati nello script con il nome esatto della colonna.
 <h2>Generazione di casi di prova</h2>
 Il programma crea_dataset_con_duplicati.py genera un file csv con 100 linee di contatti, di cui 10 sono contatti duplicati.</br>
-Ad esempio uno ha l'indirizzo dell'ufficio e l'altro ha il numero di telefono.
+Ad esempio uno ha l'indirizzo dell'ufficio e l'altro ha il numero di telefono.</br>
+Esegui lo script di Merge: Passa questo file contatti_duplicati_test.csv attraverso lo script di pulizia che abbiamo scritto nei messaggi precedenti.</br>
+Cosa aspettarsi:</br>
+<li>Il file finale deve avere 90 righe (80 originali + 10 fusi).</li>
+<li>I 10 record "UserDupl" devono contenere sia il numero di telefono (preso dal record A) sia l'azienda e la città (presi dal record B).</li>
+<li>Il campo "Stato Revisione" deve essere valorizzato su "Da Revisionare" solo per questi 10 record.</li>
