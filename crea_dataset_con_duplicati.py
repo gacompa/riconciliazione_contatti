@@ -1,8 +1,7 @@
 import pandas as pd
 import random
-import numpy as np
 
-# Colonne esatte dalla tua immagine
+# Colonne basate sulla tua immagine
 columns = [
     "First Name", "Middle Name", "Last Name", "Title", "Suffix", "Nickname",
     "Given Yomi", "Surname Yomi", "E-mail Address", "E-mail 2 Address",
@@ -22,48 +21,40 @@ columns = [
 
 data = []
 
-# --- GENERAZIONE DEI PRIMI 80 RECORD (Standard) ---
-for i in range(80):
-    row = {col: "" for col in columns}
-    row["First Name"] = random.choice(["Alessandro", "Sofia", "Leonardo", "Giulia"])
-    row["Last Name"] = random.choice(["Rossi", "Ferrari", "Russo", "Smith"])
-    
-    # 95% hanno la mail (quindi qui quasi tutti)
-    row["E-mail Address"] = f"test{i}@progetto-it.com"
-    
-    # 75% hanno il telefono (60 su 80 qui)
-    if i < 60:
-        prefisso = "+39" if i > 15 else "+44"
-        row["Mobile Phone"] = f"{prefisso} 34{random.randint(10,99)} {random.randint(1000,9999)}"
-        
-    data.append(row)
-
-# --- GENERAZIONE DEI 10 "GEMELLI" (20 RECORD TOTALI) ---
-# Creiamo 10 coppie che condividono la stessa mail ma hanno dati diversi
+# --- 1. I "GEMELLI CATTIVI" (10 COPPIE / 20 RECORD) ---
+# Obiettivo: Testare la sensibilità al Case (Maiuscole) e agli spazi
 for i in range(10):
-    email_comune = f"duplicato_test_{i}@azienda.it"
-    nome = f"UserDupl{i}"
-    cognome = f"TestMerge{i}"
-
-    # Versione A: Ha il Telefono ma NON l'indirizzo/azienda
+    email_base = f"Cattivo_{i}@SindromeFortino.it"
+    
+    # Record A: Tutto minuscolo e con spazi extra
     row_a = {col: "" for col in columns}
-    row_a["First Name"], row_a["Last Name"], row_a["E-mail Address"] = nome, cognome, email_comune
-    row_a["Mobile Phone"] = "+39 012345678"
-    row_a["Notes"] = "Nota presente solo nel record A"
+    row_a["First Name"] = "  alessandro  " # Spazi prima e dopo
+    row_a["Last Name"] = "ROSSI"
+    row_a["E-mail Address"] = email_base.lower() 
+    row_a["Mobile Phone"] = "3471234567" # Senza prefisso
     data.append(row_a)
 
-    # Versione B: Ha Azienda e Job Title ma NON il telefono
+    # Record B: Mix di maiuscole e spazi diversi
     row_b = {col: "" for col in columns}
-    row_b["First Name"], row_b["Last Name"], row_b["E-mail Address"] = nome, cognome, email_comune
-    row_b["Company"] = "NexaCore Solutions"
-    row_b["Job Title"] = "Senior Consultant"
-    row_b["Business City"] = "Milano"
+    row_b["First Name"] = "Alessandro"
+    row_b["Last Name"] = "rossi " # Spazio alla fine
+    row_b["E-mail Address"] = f"  {email_base.upper()}  " # Maiuscolo e spazi
+    row_b["Company"] = "NexaCore SOLUTIONS"
+    row_b["Mobile Phone"] = "+39 347.123.4567" # Formato diverso
     data.append(row_b)
 
-# --- SALVATAGGIO ---
-df = pd.DataFrame(data, columns=columns)
-# Mescoliamo i record per non averli tutti in fila (test più realistico)
-df = df.sample(frac=1).reset_index(drop=True)
-df.to_csv('contatti_duplicati_test.csv', index=False, encoding='utf-8')
+# --- 2. IL RESTO DEL DATASET (80 RECORD) ---
+for i in range(80):
+    row = {col: "" for col in columns}
+    row["First Name"] = random.choice(["Marco", "Elena", "Klaus", "John"])
+    row["Last Name"] = random.choice(["Bianchi", "Müller", "Smith", "Ferrari"])
+    row["E-mail Address"] = f"user_{i}@test.com"
+    if i < 60:
+        row["Mobile Phone"] = f"+39 {random.randint(300, 399)} {random.randint(100000, 999999)}"
+    data.append(row)
 
-print("Dataset generato: 100 righe totali con 10 coppie di duplicati da fondere.")
+df = pd.DataFrame(data, columns=columns)
+df = df.sample(frac=1).reset_index(drop=True)
+df.to_csv('contatti_variante_cattiva.csv', index=False, encoding='utf-8')
+
+print("File 'contatti_variante_cattiva.csv' generato con trappole di formattazione.")
