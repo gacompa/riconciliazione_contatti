@@ -18,18 +18,37 @@ columns = [
     "Spouse", "Schools", "Hobby", "Location", "Web Page", "Birthday",
     "Anniversary", "Notes"
 ]
-
+contact_names=["Adele","Alberto","Alessandro","Alessia","Alessio","Alice","Andrea","Angela","Anita","Anna",
+"Antonio","Arianna","Aurora","Beatrice","Bianca","Camilla","Caterina","Cesare","Chiara","Christian","Clara",
+"Claudia","Claudio","Cristina","Damiano","Daniele","Davide","Diletta","Edoardo","Elena","Eleonora","Elisa","Emanuele","Emma",
+"Enrico","Ester","Ettore","Fabio","Federica","Federico","Filippo","Francesca","Francesco","Gabriele","Gaia",
+"Giacomo","Ginevra","Giorgia","Giorgio","Giovanni","Giulia","Giuseppe","Greta","Ilaria","Jacopo","Laura",
+"Leonardo","Lorenzo","Luca","Lucia","Ludovica","Ludovico","Manuel","Marco","Maria","Marta","Martina","Matilde",
+"Matteo","Mattia","Maurizio","Michele","Miriam","Nicola","Noemi","Paola","Paolo","Pietro","Raffaele","Rebecca",
+"Riccardo","Roberta","Roberto","Rosa","Salvatore","Samuele","Sara","Sebastiano","Serena","Silvia","Simona",
+"Simone","Sofia","Stefano","Tancredi","Tommaso","Valentina","Valerio","Vincenzo","Vittoria"
+]
+contact_surnames=["Amato","Anderson","Barbera","Barbieri","Barone","Bauer","Becker","Benedetti","Bernardi",
+"Bianchi","Brown","Bruno","Caputo","Carbone","Caruso","Cattaneo","Colombo","Conti","Costa","D’Amico","Davis",
+"De Luca","De Santis","Donati","Esposito","Farina","Ferrara","Ferrari","Ferri","Fiore","Fischer","Fontana",
+"Franceschini","Galli","Gallo","Gatti","Gentile","Giordano","Giuliani","Grassi","Greco","Guerra","Hoffmann",
+"Johnson","Jones","Klein","Koch","Leone","Lombardi","Longo","Mancini","Mariani","Marini","Marino","Martini",
+"Martino","Mazza","Meyer","Miller","Montanari","Monti","Morelli","Moretti","Moretti","Müller","Negri",
+"Pagano","Palmieri","Palumbo","Pellegrini","Pellegrino","Ricci","Richter","Rinaldi","Riva","Rizzi","Rizzo",
+"Romano","Rossetti","Rossi","Russo","Sanna","Santoro","Schäfer","Schmidt","Schneider","Schulz","Serra","Silvestri",
+"Smith","Taylor","Testa","Tosi","Valentini","Vitale","Vitali","Wagner","Weber","Williams","Wilson"
+]
 data = []
 
 # --- 1. I "GEMELLI CATTIVI" (10 COPPIE / 20 RECORD) ---
 # Obiettivo: Testare la sensibilità al Case (Maiuscole) e agli spazi
 for i in range(10):
-    email_base = f"Cattivo_{i}@SindromeFortino.it"
+    email_base = f"nomeduplicato_{i}@example.it"
     
     # Record A: Tutto minuscolo e con spazi extra
     row_a = {col: "" for col in columns}
     row_a["First Name"] = "  alessandro  " # Spazi prima e dopo
-    row_a["Last Name"] = "ROSSI"
+    row_a["Last Name"] = "ROSSINI"
     row_a["E-mail Address"] = email_base.lower() 
     row_a["Mobile Phone"] = "3471234567" # Senza prefisso
     data.append(row_a)
@@ -37,7 +56,7 @@ for i in range(10):
     # Record B: Mix di maiuscole e spazi diversi
     row_b = {col: "" for col in columns}
     row_b["First Name"] = "Alessandro"
-    row_b["Last Name"] = "rossi " # Spazio alla fine
+    row_b["Last Name"] = "rossini " # Spazio alla fine
     row_b["E-mail Address"] = f"  {email_base.upper()}  " # Maiuscolo e spazi
     row_b["Company"] = "NexaCore SOLUTIONS"
     row_b["Mobile Phone"] = "+39 347.123.4567" # Formato diverso
@@ -46,8 +65,8 @@ for i in range(10):
 # --- 2. IL RESTO DEL DATASET (80 RECORD) ---
 for i in range(80):
     row = {col: "" for col in columns}
-    row["First Name"] = random.choice(["Marco", "Elena", "Klaus", "John"])
-    row["Last Name"] = random.choice(["Bianchi", "Müller", "Smith", "Ferrari"])
+    row["First Name"] = random.choice(contact_names)
+    row["Last Name"] = random.choice(contact_surnames)
     row["E-mail Address"] = f"user_{i}@test.com"
     if i < 60:
         row["Mobile Phone"] = f"+39 {random.randint(300, 399)} {random.randint(100000, 999999)}"
