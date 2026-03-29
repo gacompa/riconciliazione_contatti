@@ -13,3 +13,6 @@ Come funziona la logica "Selettiva"
 <li>groupby().first(): Questa è la magia. Per ogni gruppo di email uguali, Python guarda la colonna "Telefono". Se la prima riga è vuota, passa alla seconda, e così via, finché non trova un numero. In questo modo "riempie i buchi" usando i dati dei duplicati meno completi.</li>
 <li>Stato Revisione: Se il programma nota che per un'email c'erano originariamente più righe, marchia il risultato come "Da Revisionare". Questo ti protegge dalla Sindrome di Superiorità algoritmica: l'ultima parola resta a te.</li><br></br>
 Se il file CSV di Outlook ha le intestazioni diverse (es. in italiano "Indirizzo di posta elettronica"), bisogna cambiare la variabile chiave_duplicati nello script con il nome esatto della colonna.
+<h2>Generazione di casi di prova</h2>
+Il programma crea_dataset_con_duplicati.py genera un file csv con 100 linee di contatti, di cui 10 sono contatti duplicati.</br>
+Ad esempio uno ha l'indirizzo dell'ufficio e l'altro ha il numero di telefono.
