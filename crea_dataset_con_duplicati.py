@@ -74,6 +74,6 @@ for i in range(80):
 
 df = pd.DataFrame(data, columns=columns)
 df = df.sample(frac=1).reset_index(drop=True)
-df.to_csv('contatti_variante_cattiva.csv', index=False, encoding='utf-8')
+df.to_csv('contatti_variante_con_trappole.csv', index=False, encoding='utf-8')
 
-print("File 'contatti_variante_cattiva.csv' generato con trappole di formattazione.")
+print("File 'contatti_variante_con_trappole.csv' generato con trappole di formattazione.")
