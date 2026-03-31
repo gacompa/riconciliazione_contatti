@@ -38,6 +38,15 @@ contact_surnames=["Amato","Anderson","Barbera","Barbieri","Barone","Bauer","Beck
 "Romano","Rossetti","Rossi","Russo","Sanna","Santoro","Schäfer","Schmidt","Schneider","Schulz","Serra","Silvestri",
 "Smith","Taylor","Testa","Tosi","Valentini","Vitale","Vitali","Wagner","Weber","Williams","Wilson"
 ]
+contact_company=["NexaCore Solutions","SkyNetix Systems","ByteFlow Digital","PrismLogic IT","Vertex Innovations","CloudArc Technologies",
+"DataPulse Analytics","CyberShield Pro","Quantum Leap Soft","BitStream Global","IronCode Labs","NanoWave Tech","Synapse Robotics",
+"Vector Dynamics","AlphaGrid Systems","BlueHorizon Strategy","Zenith Consulting","Peak Performance Partners","Global Bridge Group",
+"Meridian Advisory","Sterling Asset Management","Nexus Business Hub","Vantage Point Services","KeyStone Operations","BrightPath Consulting",
+"CoreValues Group","Insight Partners","Milestone Management","Catalyst Solutions","Elite Vision Group","SteelForge Industries","TerraMove Logistics",
+"AeroStream Manufacturing","PowerGrid Energy","EcoFlow Resources","Titan Heavy Equipment","Global Cargo Express","SolidFoundations Construction",
+"Precision Parts Ltd.","OceanBlue Shipping","GreenHarvest Foods","PureNature Organics","UrbanBites Catering","DailyFresh Markets","Velvet Touch Retail",
+"Global Gourmet Imports","PrimeSelection Goods","Vitality Health Foods","MountainSpring Beverages","Artisan Heritage Co."
+]
 data = []
 
 # --- 1. I "GEMELLI CATTIVI" (10 COPPIE / 20 RECORD) ---
@@ -67,13 +76,15 @@ for i in range(80):
     row = {col: "" for col in columns}
     row["First Name"] = random.choice(contact_names)
     row["Last Name"] = random.choice(contact_surnames)
-    row["E-mail Address"] = f"user_{i}@test.com"
+    company_user= random.choice(contact_company)
+    row["Company"] = company_user
+    row["E-mail Address"] = f"user_{i}@{company_user.replace(' ', '').lower().strip()}.test.com"
     if i < 60:
         row["Mobile Phone"] = f"+39 {random.randint(300, 399)} {random.randint(100000, 999999)}"
     data.append(row)
 
 df = pd.DataFrame(data, columns=columns)
 df = df.sample(frac=1).reset_index(drop=True)
-df.to_csv('contatti_variante_con_trappole.csv', index=False, encoding='utf-8')
+df.to_csv('contatti_originale.csv', index=False, encoding='utf-8')
 
-print("File 'contatti_variante_con_trappole.csv' generato con trappole di formattazione.")
+print("File 'contatti_originale.csv' generato con trappole di formattazione.")

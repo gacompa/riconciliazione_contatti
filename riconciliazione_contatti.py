@@ -25,7 +25,7 @@ def merge_contatti(file_input, file_output):
         
         # Pulizia Nomi e Cognomi: Capitalize e Trim
         df['First Name'] = df['First Name'].astype(str).str.strip().str.capitalize()
-        df['Last Name'] = df['Last Name'].astype(str).str.strip().str.upper()
+        df['Last Name'] = df['Last Name'].astype(str).str.strip().str.capitalize()
 
         # 3. IDENTIFICAZIONE DUPLICATI
         # Contiamo quante volte appare ogni email per impostare lo Stato Revisione dopo
